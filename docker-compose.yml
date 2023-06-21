@@ -34,7 +34,7 @@ services:
       target: run
     restart: always
     environment:
-      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@pompom-database:3307/${MYSQL_DATABASE}
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@pompom-database:3306/${MYSQL_DATABASE}
     hostname: pompom-bot
 
 networks:

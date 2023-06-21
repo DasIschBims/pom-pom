@@ -44,4 +44,4 @@ RUN chmod +x ./wait-for.sh
 RUN npm run prisma:generate
 
 # Start app
-CMD /bin/sh -c "./wait-for.sh pom-pom-database 3307 && npx prisma migrate deploy && npm run start:prod"
+CMD /bin/sh -c "./wait-for.sh pompom-database 3306 && npx prisma migrate deploy && npm run start:prod"
