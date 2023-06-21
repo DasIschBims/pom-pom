@@ -44,7 +44,8 @@ export default new Command({
                         .setTimestamp()
                         .setTitle("Error")
                         .setDescription("Failed to set data: user_data is null")
-                ]
+                ],
+                ephemeral: true,
             });
             return;
         }
@@ -66,7 +67,8 @@ export default new Command({
                     .setTimestamp()
                     .setTitle("Success")
                     .setDescription("Successfully set data.")
-            ]
+            ],
+            ephemeral: true,
         });
     }
 });
