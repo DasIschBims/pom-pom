@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  pom-pom-database:
-    container_name: pom-pom-database
+  pompom-database:
+    container_name: pompom-database
     env_file:
       - .env
     image: mariadb:10.9
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
         - ./data:/var/lib/mysql
     environment:
@@ -17,27 +17,27 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_HOST: ${MYSQL_HOST}
     networks:
-        - pom-pom-network
+        - pompom-network
     restart: always
-    hostname: pom-pom-database
+    hostname: pompom-database
 
-  pom-pom-bot:
-    image: pom-pom-bot
-    container_name: pom-pom-bot
+  pompom-bot:
+    image: pompom-bot
+    container_name: pompom-bot
     depends_on:
-      - pom-pom-database
+      - pompom-database
     networks:
-      - pom-pom-network
+      - pompom-network
     build:
       context: .
       dockerfile: Dockerfile
       target: run
     restart: always
     environment:
-      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@pom-pom-database:3306/${MYSQL_DATABASE}
-    hostname: pom-pom-bot
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@pompom-database:3307/${MYSQL_DATABASE}
+    hostname: pompom-bot
 
 networks:
-    pom-pom-network:
+    pompom-network:
       external: false
-      name: pom-pom-network
+      name: pompom-network
