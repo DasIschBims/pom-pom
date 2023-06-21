@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  pom-pom-database:
+    container_name: pom-pom-database
+    env_file:
+      - .env
+    image: mariadb:10.9
+    ports:
+      - "3306:3306"
+    volumes:
+        - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+    networks:
+        - pom-pom-network
+    restart: always
+    hostname: pom-pom-database
+
+  pom-pom-bot:
+    image: pom-pom-bot
+    container_name: pom-pom-bot
+    depends_on:
+      - pom-pom-database
+    networks:
+      - pom-pom-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    restart: always
+    environment:
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@pom-pom-database:3306/${MYSQL_DATABASE}
+    hostname: pom-pom-bot
+
+networks:
+    pom-pom-network:
+      external: false
+      name: pom-pom-network
