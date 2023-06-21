@@ -19,7 +19,8 @@ export default new Command({
                     .setTimestamp()
                     .setTitle("Error")
                     .setDescription(`You can only use this command once every ${cooldown / 1000 / 60} minutes.`)
-            ]
+            ],
+            ephemeral: true,
         });
 
         const data = await fetchStamina(interaction.user);
@@ -32,7 +33,8 @@ export default new Command({
                         .setTimestamp()
                         .setTitle("Error")
                         .setDescription(data.error)
-                ]
+                ],
+                ephemeral: true,
             });
         }
 
@@ -65,7 +67,8 @@ export default new Command({
                             inline: true,
                         }
                     ])
-            ]
+            ],
+            ephemeral: true,
         });
     }
 });

@@ -8,7 +8,8 @@ datasource db {
 }
 
 model User {
-  userId      String @id @unique
+  userId      String  @id @unique
   starRailUID String
   hoyoCookie  String
+  firstUse    Boolean @default(true)
 }

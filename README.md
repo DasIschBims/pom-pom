@@ -10,4 +10,6 @@ If you're using the public version of the bot, which you can invite via [this](h
 
 3. **Limited Liability:** While I take precautions to maintain the bot's security, please be aware that I am not responsible for any damage that may occur when the bot is hosted by malicious actors or similar entities. Additionally, I am not liable for any other types of damage that may arise from the use of this software.
 
+4. **Data Deletion:** If you wish to delete your data, just run the command ``/unsetdata``. This will delete all data associated with your Discord account from the database. 
+
 By using the bot, you acknowledge and accept the terms mentioned above.
