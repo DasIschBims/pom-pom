@@ -1,5 +1,5 @@
 export const getAccountRegion = (UID: string) => {
-    const regionNum = UID.slice(0, 1)
+    const regionNum = UID.slice(0, 1);
 
     switch (regionNum) {
         case "9":
