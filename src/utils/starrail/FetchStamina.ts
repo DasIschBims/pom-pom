@@ -3,8 +3,8 @@ import * as crypto from "crypto";
 import {StaminaData} from "../../types/StarRail";
 import {prisma} from "../db/Prisma";
 import {User} from "discord.js";
+import {getAccountRegion} from "./AccountRegion";
 
-const server = "prod_official_eur";
 const ds_salt = "6s25p5ox5y14umn1p61aqyyvbvvl3lrt";
 const url = "https://bbs-api-os.hoyolab.com/game_record/hkrpg/api/note";
 
@@ -19,6 +19,15 @@ export const fetchStamina = async (user: User): Promise<StaminaData> => {
         Logger.logError("Failed to fetch stamina data: user_data is null", "FetchStamina.ts");
         return {
             error: "Failed to fetch stamina data: did you add your UID and cookie yet?",
+        };
+    }
+
+    const server = getAccountRegion(user_data.starRailUID);
+
+    if (!server) {
+        Logger.logError("Failed to fetch stamina data: invalid UID", "FetchStamina.ts");
+        return {
+            error: "Failed to fetch stamina data: invalid UID",
         };
     }
 
